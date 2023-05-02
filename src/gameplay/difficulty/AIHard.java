@@ -1,3 +1,9 @@
+package gameplay.difficulty;
+
+import gameplay.Board;
+import gameplay.Position;
+import gameplay.Sign;
+
 import java.util.ArrayList;
 import java.util.stream.IntStream;
 

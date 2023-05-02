@@ -1,3 +1,5 @@
+package gameplay;
+
 public class Score {
     private int scorePlayer1;
     private int scorePlayer2;

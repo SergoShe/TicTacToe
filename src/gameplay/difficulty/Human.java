@@ -1,3 +1,9 @@
+package gameplay.difficulty;
+
+import gameplay.Board;
+import gameplay.Position;
+import gameplay.Sign;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,8 +18,8 @@ public class Human extends Player {
     public Position move(Board board) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         boolean isCorrect = false;
-        int dot;
         Position position = null;
+        int dot;
         while (!isCorrect) {
             System.out.println("Enter number (1-9): ");
             try {

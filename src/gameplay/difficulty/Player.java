@@ -1,3 +1,9 @@
+package gameplay.difficulty;
+
+import gameplay.Board;
+import gameplay.Position;
+import gameplay.Sign;
+
 import java.io.IOException;
 
 public abstract class Player {

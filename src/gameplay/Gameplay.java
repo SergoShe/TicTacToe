@@ -1,3 +1,11 @@
+package gameplay;
+
+import initializer.PlayerDifficulty;
+import gameplay.difficulty.AIEasy;
+import gameplay.difficulty.AIHard;
+import gameplay.difficulty.Human;
+import gameplay.difficulty.Player;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

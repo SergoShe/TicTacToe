@@ -1,3 +1,5 @@
+package gameplay;
+
 public class Position {
     private final int pos;
 
