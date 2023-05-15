@@ -1,13 +1,15 @@
-package gameplay.difficulty;
+package initializer.player.bot;
 
 import gameplay.Board;
 import gameplay.Position;
 import gameplay.Sign;
+import initializer.player.AIBot;
 
 import java.util.Random;
 import java.util.stream.IntStream;
 
-public class AIEasy extends Player {
+
+public class AIEasy extends AIBot {
 
     public AIEasy(String name, Sign sign) {
         super(name, sign);

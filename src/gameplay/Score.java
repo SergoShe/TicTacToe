@@ -1,9 +1,9 @@
 package gameplay;
 
 public class Score {
-    private int scorePlayer1;
-    private int scorePlayer2;
-    private int scoreDraw;
+    private int scorePlayer1 = 0;
+    private int scorePlayer2 = 0;
+    private int scoreDraw = 0;
 
     public void incrementPlayer1() {
         scorePlayer1++;

@@ -1,10 +1,6 @@
 package gameplay;
 
-import initializer.PlayerDifficulty;
-import gameplay.difficulty.AIEasy;
-import gameplay.difficulty.AIHard;
-import gameplay.difficulty.Human;
-import gameplay.difficulty.Player;
+import initializer.player.Player;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,22 +10,16 @@ public class Gameplay {
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     private final Board board = new Board();
     private final Score score = new Score();
-    private final PlayerDifficulty difficulty;
+    private final Player firstPlayer;
+    private final Player secondPlayer;
 
-    public Gameplay(PlayerDifficulty difficulty) {
-        this.difficulty = difficulty;
+    public Gameplay(Player firstPlayer, Player secondPlayer) {
+        this.firstPlayer = firstPlayer;
+        this.secondPlayer = secondPlayer;
     }
-
-    private PlayerDifficulty getDifficulty() {
-        return difficulty;
-    }
-
-    private Player firstPlayer;
-    private Player secondPlayer;
 
 
     public void startGame() throws IOException {
-        init();
         Player currentPlayer = firstPlayer;
         boolean isEndGame = false;
         while (!isEndGame) {
@@ -49,11 +39,11 @@ public class Gameplay {
             score.showScore();
             boolean isContinue = false;
             while (!isContinue) {
-                System.out.println("Continue?");
-                System.out.println("Y/N");
-                String text = reader.readLine().toLowerCase();
-                switch (text) {
-                    case "y" -> {
+                System.out.println("Make a choiсe:");
+                System.out.println("1.Continue game\n0.Exit");
+                GameMode mode = GameMode.valueOf(Integer.parseInt(reader.readLine()));
+                switch (mode) {
+                    case CONTINUE -> {
                         if (score.getTotal() % 2 == 0) {
                             currentPlayer = firstPlayer;
                             firstPlayer.setSign(Sign.SIGN_X);
@@ -65,7 +55,7 @@ public class Gameplay {
                         }
                         isContinue = true;
                     }
-                    case "n" -> {
+                    case EXIT -> {
                         isEndGame = true;
                         isContinue = true;
                     }
@@ -79,16 +69,6 @@ public class Gameplay {
         Position position = player.move(board);
         board.setSign(position, player.getSign());
         return position;
-    }
-
-    private void init() {
-        firstPlayer = new Human("Player 1", Sign.SIGN_X);
-        secondPlayer =
-                switch (getDifficulty()) {
-                    case HUMAN -> new Human("Player 2", Sign.SIGN_O);
-                    case BOT_EASY -> new AIEasy("Player 2", Sign.SIGN_O);
-                    case BOT_HARD -> new AIHard("Player 2", Sign.SIGN_O);
-                };
     }
 
     private Player changePlayer(Player currentPlayer) {

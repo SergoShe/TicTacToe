@@ -1,13 +1,14 @@
-package gameplay.difficulty;
+package initializer.player.bot;
 
 import gameplay.Board;
 import gameplay.Position;
 import gameplay.Sign;
+import initializer.player.AIBot;
 
 import java.util.ArrayList;
 import java.util.stream.IntStream;
 
-public class AIHard extends Player {
+public class AIHard extends AIBot {
 
     public AIHard(String name, Sign sign) {
         super(name, sign);

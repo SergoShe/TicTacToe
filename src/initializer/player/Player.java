@@ -1,4 +1,4 @@
-package gameplay.difficulty;
+package initializer.player;
 
 import gameplay.Board;
 import gameplay.Position;
