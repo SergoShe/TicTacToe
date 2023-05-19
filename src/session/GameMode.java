@@ -1,4 +1,4 @@
-package gameplay;
+package session;
 
 import java.util.HashMap;
 import java.util.Map;

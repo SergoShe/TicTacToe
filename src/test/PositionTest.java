@@ -1,6 +1,6 @@
 package test;
 
-import gameplay.Position;
+import session.gameplay.Position;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

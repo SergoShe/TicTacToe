@@ -1,33 +1,34 @@
-package initializer;
+package session.gameplay;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public enum AIdifficulty {
-    EASY(1),
-    HARD(2);
+public enum Sign {
+    SIGN_X('X'),
+    SIGN_O('O'),
+    SIGN_EMPTY('*');
 
-    private final int value;
-    private static final Map<Integer, AIdifficulty> map = new HashMap<>();
+    private final char value;
+    private static final Map<Character, Sign> map = new HashMap<>();
 
-    AIdifficulty(int value) {
+    Sign(char value) {
         this.value = value;
     }
 
     static {
-        for (AIdifficulty mode : AIdifficulty.values()) {
+        for (Sign mode : Sign.values()) {
             map.put(mode.value, mode);
         }
     }
 
-    public static AIdifficulty valueOf(int value) {
+    public static Sign valueOf(char value) {
         if (!map.containsKey(value)) {
             throw new IllegalArgumentException("Wrong game difficulty mode");
         }
         return map.get(value);
     }
 
-    public int getValue() {
+    public char getValue() {
         return value;
     }
 }

@@ -1,13 +1,15 @@
-package gameplay;
+package session.gameplay;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Board {
-    private final Sign[][] table = {{Sign.SIGN_EMPTY, Sign.SIGN_EMPTY, Sign.SIGN_EMPTY},
-            {Sign.SIGN_EMPTY, Sign.SIGN_EMPTY, Sign.SIGN_EMPTY},
-            {Sign.SIGN_EMPTY, Sign.SIGN_EMPTY, Sign.SIGN_EMPTY}};
+    private final Sign[][] table = new Sign[3][3];
+
+    public Board(){
+        Arrays.stream(table).forEach(x -> Arrays.fill(x, Sign.SIGN_EMPTY));
+    }
 
     public void setSign(Position pos, Sign sign) {
         table[pos.getRow()][pos.getColumn()] = sign;

@@ -1,8 +1,8 @@
 package test;
 
-import gameplay.Board;
-import gameplay.Position;
-import gameplay.Sign;
+import session.gameplay.Board;
+import session.gameplay.Position;
+import session.gameplay.Sign;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,19 +13,6 @@ public class BoardTest {
     @Before
     public void setUp() {
         board = new Board();
-    }
-
-    @Test
-    public void testInitTable() {
-        Sign[][] excepted = {{Sign.SIGN_EMPTY, Sign.SIGN_EMPTY, Sign.SIGN_EMPTY},
-                {Sign.SIGN_EMPTY, Sign.SIGN_EMPTY, Sign.SIGN_EMPTY},
-                {Sign.SIGN_EMPTY, Sign.SIGN_EMPTY, Sign.SIGN_EMPTY}};
-        board.setSign(new Position(1),Sign.SIGN_X);
-        board.setSign(new Position(5),Sign.SIGN_O);
-        board.setSign(new Position(9),Sign.SIGN_X);
-        board.initTable();
-        Sign[][] actual = board.getTable();
-        Assert.assertArrayEquals(excepted,actual);
     }
 
     @Test

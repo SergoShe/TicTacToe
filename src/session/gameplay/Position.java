@@ -1,4 +1,4 @@
-package gameplay;
+package session.gameplay;
 
 public class Position {
     private final int pos;

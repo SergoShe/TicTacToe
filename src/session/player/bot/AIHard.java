@@ -1,27 +1,26 @@
-package initializer.player.bot;
+package session.player.bot;
 
-import gameplay.Board;
-import gameplay.Position;
-import gameplay.Sign;
-import initializer.player.AIBot;
+import session.gameplay.Board;
+import session.gameplay.Position;
+import session.gameplay.Sign;
+import session.player.AIBot;
 
 import java.util.ArrayList;
-import java.util.stream.IntStream;
 
 public class AIHard extends AIBot {
 
-    public AIHard(String name, Sign sign) {
-        super(name, sign);
+    public AIHard(String name) {
+        super(name);
     }
 
     @Override
-    public Position move(Board board) {
+    public Position move(Board board, Sign sign) {
         int bestScore = Integer.MIN_VALUE;
         ArrayList<Integer> bestMoves = new ArrayList<>();
         for (int freeCell : findFreeCells(board.getTable())) {
             Position currentPos = new Position(freeCell);
-            board.setSign(currentPos, getSign());
-            int score = minimax(board, freeCell, Integer.MIN_VALUE, Integer.MAX_VALUE, false);
+            board.setSign(currentPos, sign);
+            int score = minimax(board, sign, freeCell, Integer.MIN_VALUE, Integer.MAX_VALUE, false);
             board.setSign(currentPos, Sign.SIGN_EMPTY);
             if (score > bestScore) {
                 bestScore = score;
@@ -35,7 +34,7 @@ public class AIHard extends AIBot {
         return new Position(bestMoves.get(randomIndex));
     }
 
-    private int minimax(Board board, int currentMove, int alpha, int beta, boolean isMaximizing) {
+    private int minimax(Board board, Sign sign, int currentMove, int alpha, int beta, boolean isMaximizing) {
         boolean isWin = board.checkWin(new Position(currentMove));
         if (isWin) {
             return isMaximizing ? -10 : 10;
@@ -49,8 +48,8 @@ public class AIHard extends AIBot {
             for (int freeCell : findFreeCells(board.getTable())) {
                 if (isContinue) {
                     Position currentPos = new Position(freeCell);
-                    board.setSign(currentPos, getSign());
-                    int score = minimax(board, freeCell, alpha, beta, false);
+                    board.setSign(currentPos, sign);
+                    int score = minimax(board, sign, freeCell, alpha, beta, false);
                     board.setSign(currentPos, Sign.SIGN_EMPTY);
                     bestScore = Math.max(score, bestScore);
                     alpha = Math.max(alpha, score);
@@ -66,8 +65,8 @@ public class AIHard extends AIBot {
             for (int freeCell : findFreeCells(board.getTable())) {
                 if (isContinue) {
                     Position currentPos = new Position(freeCell);
-                    board.setSign(currentPos, (getSign() == Sign.SIGN_X) ? Sign.SIGN_O : Sign.SIGN_X);
-                    int score = minimax(board, freeCell, alpha, beta, true);
+                    board.setSign(currentPos, (sign == Sign.SIGN_X) ? Sign.SIGN_O : Sign.SIGN_X);
+                    int score = minimax(board, sign, freeCell, alpha, beta, true);
                     board.setSign(currentPos, Sign.SIGN_EMPTY);
                     bestScore = Math.min(score, bestScore);
                     beta = Math.min(beta, score);
@@ -78,15 +77,5 @@ public class AIHard extends AIBot {
             }
             return bestScore;
         }
-    }
-
-    private int[] findFreeCells(Sign[][] table) {
-        return IntStream.range(0, table.length)
-                .boxed()
-                .flatMap(row -> IntStream.range(0, table[row].length)
-                        .filter(column -> table[row][column] == Sign.SIGN_EMPTY)
-                        .mapToObj(column -> row * table.length + column + 1))
-                .mapToInt(Integer::intValue)
-                .toArray();
     }
 }

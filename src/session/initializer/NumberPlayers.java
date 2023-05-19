@@ -1,4 +1,4 @@
-package initializer;
+package session.initializer;
 
 import java.util.HashMap;
 import java.util.Map;

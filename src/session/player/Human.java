@@ -1,8 +1,8 @@
-package initializer.player;
+package session.player;
 
-import gameplay.Board;
-import gameplay.Position;
-import gameplay.Sign;
+import session.gameplay.Board;
+import session.gameplay.Position;
+import session.gameplay.Sign;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,12 +10,12 @@ import java.io.InputStreamReader;
 
 public class Human extends Player {
 
-    public Human(String name, Sign sign) {
-        super(name, sign);
+    public Human(String name) {
+        super(name);
     }
 
     @Override
-    public Position move(Board board) throws IOException {
+    public Position move(Board board, Sign sign) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         boolean isCorrect = false;
         Position position = null;
@@ -26,7 +26,7 @@ public class Human extends Player {
                 dot = Integer.parseInt(reader.readLine());
                 if (dot < 1 || dot > 9) {
                     System.out.println("\nWrong cell's number. Enter a number of free cell.");
-                    System.out.println("Turn: " + getName() + " (" + getSign().getValue() + ")");
+                    System.out.println("Turn: " + getName() + " (" + sign.getValue() + ")");
                     System.out.println("Current:");
                     board.printTable();
                 } else {
@@ -35,14 +35,14 @@ public class Human extends Player {
                         isCorrect = true;
                     } else {
                         System.out.println("\nChoose free cell's number.");
-                        System.out.println("Turn: " + getName() + " (" + getSign().getValue() + ")");
+                        System.out.println("Turn: " + getName() + " (" + sign.getValue() + ")");
                         System.out.println("Current:");
                         board.printTable();
                     }
                 }
             } catch (NumberFormatException e) {
                 System.out.println("\nEnter incorrect command. Enter a number of free cell.");
-                System.out.println("Turn: " + getName() + " (" + getSign().getValue() + ")");
+                System.out.println("Turn: " + getName() + " (" + sign.getValue() + ")");
                 System.out.println("Current:");
                 board.printTable();
             }
