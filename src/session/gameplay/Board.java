@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Board {
-    private final Sign[][] table = new Sign[3][3];
+public class Board implements Cloneable {
+    private Sign[][] table = new Sign[3][3];
 
-    public Board(){
+    public Board() {
         Arrays.stream(table).forEach(x -> Arrays.fill(x, Sign.SIGN_EMPTY));
     }
 
@@ -33,14 +33,9 @@ public class Board {
     public void printTable() {
         IntStream.range(0, table.length)
                 .mapToObj(row -> IntStream.range(0, table[row].length)
-                        .mapToObj(column -> printSign(row, column))
+                        .mapToObj(column -> getPrintableSign(row, column))
                         .collect(Collectors.joining(" ")))
                 .forEach(System.out::println);
-
-    }
-
-    public void initTable() {
-        Arrays.stream(table).forEach(x -> Arrays.fill(x, Sign.SIGN_EMPTY));
     }
 
     public boolean checkWin(Position pos) {
@@ -64,11 +59,24 @@ public class Board {
         return table[2][0] == table[1][1] && table[1][1] == table[0][2];
     }
 
-    private String printSign(int row, int column) {
+    private String getPrintableSign(int row, int column) {
         if (table[row][column] == Sign.SIGN_EMPTY) {
             return "(" + (row * table.length + column + 1) + ")";
         } else {
             return " " + table[row][column].getValue() + " ";
+        }
+    }
+
+    @Override
+    public Board clone() {
+        try {
+            Board clone = (Board) super.clone();
+            clone.table = Arrays.stream(this.table)
+                    .map(Sign[]::clone)
+                    .toArray(Sign[][]::new);
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
         }
     }
 }

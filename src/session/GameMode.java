@@ -22,12 +22,12 @@ public enum GameMode {
 
     public static GameMode valueOf(int value) {
         if (!map.containsKey(value)) {
-            throw new IllegalArgumentException("Wrong user mode");
+            throw new IllegalArgumentException("Wrong game mode");
         }
         return map.get(value);
     }
 
-    public int getValue() {
+    public Integer getValue() {
         return value;
     }
 }

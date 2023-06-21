@@ -7,17 +7,17 @@ import java.io.IOException;
 
 public class Gameplay {
     private final Board board = new Board();
-    private final Player firstPlayer;
-    private final Player secondPlayer;
+    private final Player XPlayer;
+    private final Player OPlayer;
 
-    public Gameplay(Player firstPlayer, Player secondPlayer) {
-        this.firstPlayer = firstPlayer;
-        this.secondPlayer = secondPlayer;
+    public Gameplay(Player XPlayer, Player OPlayer) {
+        this.XPlayer = XPlayer;
+        this.OPlayer = OPlayer;
     }
 
     public Winner startGame() throws IOException {
         Winner winner = null;
-        Player currentPlayer = firstPlayer;
+        Player currentPlayer = XPlayer;
         Sign currentSign = Sign.SIGN_X;
         boolean isGameOver = false;
         while (!isGameOver) {
@@ -52,16 +52,14 @@ public class Gameplay {
     }
 
     private Player changePlayer(Player currentPlayer) {
-        return currentPlayer == firstPlayer ? secondPlayer : firstPlayer;
+        return currentPlayer == XPlayer ? OPlayer : XPlayer;
     }
-
 
     private Winner checking(Player player) {
         if (board.checkWin(player.getLastPosition())) {
             switch (player.getName()) {
                 case "Player 1" -> {
                     System.out.println("Player 1 win!");
-
                     return Winner.FIRST_PLAYER;
                 }
                 case "Player 2" -> {

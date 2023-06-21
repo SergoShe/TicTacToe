@@ -16,7 +16,7 @@ public enum AIdifficulty {
 
     static {
         for (AIdifficulty mode : AIdifficulty.values()) {
-            map.put(mode.value, mode);
+            map.put(mode.getValue(), mode);
         }
     }
 

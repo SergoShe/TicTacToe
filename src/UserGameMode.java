@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
-public enum UserGameMode {
+public enum UserGameMode  {
     EXIT(0),
     START(1);
 
@@ -14,7 +14,7 @@ public enum UserGameMode {
 
     static {
         for (UserGameMode mode : UserGameMode.values()) {
-            map.put(mode.value, mode);
+            map.put(mode.getValue(), mode);
         }
     }
 

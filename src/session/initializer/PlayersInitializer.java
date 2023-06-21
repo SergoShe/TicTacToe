@@ -10,7 +10,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Initializer {
+public class PlayersInitializer {
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     Player firstPlayer;
     Player secondPlayer;
@@ -30,7 +30,7 @@ public class Initializer {
             System.out.println("Choose number of players:");
             System.out.println("1.One Player\n2.Two Players");
             try {
-                NumberPlayers players = NumberPlayers.valueOf(Integer.parseInt(reader.readLine()));
+                NumberOfPlayers players = NumberOfPlayers.valueOf(Integer.parseInt(reader.readLine()));
                 switch (players) {
                     case ONE_PLAYER -> secondPlayer = selectAIDiffuculty();
                     case TWO_PLAYERS -> secondPlayer = new Human("Player 2");

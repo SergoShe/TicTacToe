@@ -1,7 +1,7 @@
 package session;
 
 import session.gameplay.Gameplay;
-import session.initializer.Initializer;
+import session.initializer.PlayersInitializer;
 import session.player.Player;
 
 import java.io.BufferedReader;
@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 
 public class Session {
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    Initializer init = new Initializer();
+    PlayersInitializer init = new PlayersInitializer();
     Score score = new Score();
     Player firstPlayer;
     Player secondPlayer;
