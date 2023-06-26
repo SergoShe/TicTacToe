@@ -15,13 +15,14 @@ public class AIHard extends AIBot {
 
     @Override
     public Position move(Board board, Sign sign) {
+        Board boardClone = board.clone();
         int bestScore = Integer.MIN_VALUE;
         ArrayList<Integer> bestMoves = new ArrayList<>();
-        for (int freeCell : findFreeCells(board.getTable())) {
+        for (int freeCell : findFreeCells(boardClone.getTable())) {
             Position currentPos = new Position(freeCell);
-            Board boardClone = board.clone();
             boardClone.setSign(currentPos, sign);
             int score = minimax(boardClone, sign, freeCell, Integer.MIN_VALUE, Integer.MAX_VALUE, false);
+            boardClone.setSign(currentPos, Sign.SIGN_EMPTY);
             if (score > bestScore) {
                 bestScore = score;
                 bestMoves.clear();
@@ -48,9 +49,9 @@ public class AIHard extends AIBot {
             for (int freeCell : findFreeCells(board.getTable())) {
                 if (isContinue) {
                     Position currentPos = new Position(freeCell);
-                    Board boardClone = board.clone();
-                    boardClone.setSign(currentPos, sign);
-                    int score = minimax(boardClone, sign, freeCell, alpha, beta, false);
+                    board.setSign(currentPos, sign);
+                    int score = minimax(board, sign, freeCell, alpha, beta, false);
+                    board.setSign(currentPos, Sign.SIGN_EMPTY);
                     bestScore = Math.max(score, bestScore);
                     alpha = Math.max(alpha, score);
                     if (beta <= alpha) {
@@ -65,9 +66,9 @@ public class AIHard extends AIBot {
             for (int freeCell : findFreeCells(board.getTable())) {
                 if (isContinue) {
                     Position currentPos = new Position(freeCell);
-                    Board boardClone = board.clone();
-                    boardClone.setSign(currentPos, (sign == Sign.SIGN_X) ? Sign.SIGN_O : Sign.SIGN_X);
-                    int score = minimax(boardClone, sign, freeCell, alpha, beta, true);
+                    board.setSign(currentPos, (sign == Sign.SIGN_X) ? Sign.SIGN_O : Sign.SIGN_X);
+                    int score = minimax(board, sign, freeCell, alpha, beta, true);
+                    board.setSign(currentPos, Sign.SIGN_EMPTY);
                     bestScore = Math.min(score, bestScore);
                     beta = Math.min(beta, score);
                     if (beta <= alpha) {
