@@ -46,7 +46,7 @@ public class Gameplay {
     }
 
     private Position move(Player player, Sign sign) throws IOException {
-        Position position = player.move(board, sign);
+        Position position = player.move(board.clone(), sign);
         board.setSign(position, sign);
         return position;
     }

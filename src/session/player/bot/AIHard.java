@@ -15,14 +15,13 @@ public class AIHard extends AIBot {
 
     @Override
     public Position move(Board board, Sign sign) {
-        Board boardClone = board.clone();
         int bestScore = Integer.MIN_VALUE;
         ArrayList<Integer> bestMoves = new ArrayList<>();
-        for (int freeCell : findFreeCells(boardClone.getTable())) {
+        for (int freeCell : findFreeCells(board.getTable())) {
             Position currentPos = new Position(freeCell);
-            boardClone.setSign(currentPos, sign);
-            int score = minimax(boardClone, sign, freeCell, Integer.MIN_VALUE, Integer.MAX_VALUE, false);
-            boardClone.setSign(currentPos, Sign.SIGN_EMPTY);
+            board.setSign(currentPos, sign);
+            int score = minimax(board, sign, freeCell, Integer.MIN_VALUE, Integer.MAX_VALUE, false);
+            board.setSign(currentPos, Sign.SIGN_EMPTY);
             if (score > bestScore) {
                 bestScore = score;
                 bestMoves.clear();
